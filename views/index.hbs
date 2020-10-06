@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="/assets/css/login.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+</head>
+<body>
+	 <header>
+            Chat Application Using NodeJS
+     </header>
+     <div class="row m-0">
+     	<div class="col-lg-4 col-md-3 col-sm-2  col-xs-1">
+     		
+     	</div>
+     	<div class="col-lg-4 col-md-6 col-sm-8 col-xs-10">
+     		<div id="forms">
+	     		  <p id="to-show" class="hide">{{form_condition}}</p>
+			      <form v-if="formToShow" class="login-form" action="/postMethods/login"  method="POST" >
+			      	    <center><b class="err-msg">{{err}}</b></center>
+				     	<label>Username</label> 
+				     	<input type="text" name="name" required>
+				     	<label class="mt-2">Password</label>
+				     	<input type="password" name="password" required>
+				     	<button type="submit" class="login-btn">Login</button>
+				     	<b class="dont-have" @click="formToShow = false">Don't have an account?</b>
+				       
+				  </form>
+			      <form v-else class="signup-form" action="/postMethods/signup"  method="POST" enctype="multipart/form-data">
+			      		<center><b class="err-msg">{{err_signup}}</b></center>
+			      	  	<center><b class="success-msg">{{success}}</b></center>
+				     	<label>Username</label> 
+				     	<input type="text" name="username" required>
+				     	<label class="mt-2">Password</label>
+				     	<input type="password" name="signup_password" required>
+				     	<label class="mt-2">Re-type Password</label>
+				     	<input type="password" name="password_two" required>
+				     	<label class="mt-2">Photo</label>
+				     	<input type="file" style="border: none" name="uploaded_image" required>
+				     	<button type="submit" class="signup-btn">Signup</button>
+				     	<b class="dont-have" @click="formToShow = true">Already have an account?</b>      
+			      </form>
+     		</div>
+     	</div>
+     	<div class="col-lg-4 col-md-3 col-sm-2  col-xs-1">
+     	
+     	</div>
+
+
+     </div>
+ 
+<script type="text/javascript" src="/assets/js/vue.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+</body>
+</html>

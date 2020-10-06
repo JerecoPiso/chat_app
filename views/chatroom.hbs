@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat App</title>
+        <link href="/assets/css/chatroom.css" rel="stylesheet" type="text/css">
+        <link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header>
+            Chat Application Using NodeJS, VueJS and ExpressJS
+        </header>
+            <br>
+            <a href="logout" class="logout">Logout {{name}}</a>
+
+        <div class="container" id="chatApp">
+            <div class="row">
+                <div class="col-lg-1">
+             
+                    <input type="hidden" id="id" value="{{id}}">
+                </div>
+                <div class="col-lg-4">
+                    <ul class="list-group mt-3 online-max-height">
+                        <h2 class="text-center alert alert-info p-1 sticky-top">Online People</h2>
+                     
+                        <li class="list-group-item" v-for="user in users" @click="receiver = user.username;messageInfo.receiver_id = user.users_id;userDp = user.photo;getMessages();"><img class="online-dp mr-4" :src="image+user.photo">[user.username] <b class="to-right badge">[user.msg_ctr]</b> </li>         
+                    </ul>
+                </div>
+                <div class="col-lg-5"> 
+                    <div v-if="show" class="card mt-3"> 
+                        <div class="card-header pb-1 " id="chat_header">
+                            <button class="close" @click="show=false; messageInfo.last_id = null;ctr = 0;">&times;</button>
+                            <b> <img class="dp mr-4" :src="image+userDp" alt="">[receiver]</b>
+                        </div>
+                        <div class="card-body message-max-height" id="msg">
+                          
+                             <ul class="list-group" id="messages">                 
+                                    <li class="list-group-item p-1" v-for="msg in messages"> 
+
+                                        <div v-if="msg.receiver_id == messageInfo.sender">
+                                                <i class="to-left">Sept 25 2020</i>   <br><br>
+                                            <img class="online-dp to-left" :src="image+userDp"> <p class="to-left p-2 max-width">[msg.message]   <b class="hide">[messageInfo.last_id = msg.message_id]</b></p>
+                                         
+                                        
+
+                                        </div>
+                                        
+                                         <div v-else>
+
+                                              <i class="to-right">Sept 25 2020</i><br><br>
+                                               <img class="online-dp to-right" src="/assets/images/{{photo}}"> <p class="to-right p-2 max-width"> [msg.message] <b class="hide">[messageInfo.last_id = msg.message_id]</b></p>
+
+
+
+                                        </div>
+
+                                    </li>                             
+                            </ul>            
+                        </div>
+                        
+
+                        <div class="card-footer">
+                             <input type="text" v-model="messageInfo.message" @keyup="fastSend()" class="message">
+                             <button class="send-btn" @click="sendMessage();">Send</button>
+                        </div>
+
+                    </div>
+                </div>
+                 <div class="col-lg-2">
+
+                </div>
+            </div> <!-- end class row -->
+        </div><!-- end class container -->
+        <script type="text/javascript" src="/assets/js/vue.js"></script>
+        <script type="text/javascript" src="/assets/js/axios.js"></script>
+        <script type="text/javascript" src="/assets/js/chatroom.js"></script>
+    </body>
+</html>
